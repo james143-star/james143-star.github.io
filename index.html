@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous"></script>
+
+
+
+    <title>web client</title>
+</head>
+
+<body class="body">
+    <h1 class=" mt-4" style="margin-left: 70px;">MQTT over Web Socket</h1>
+    <div class="container ">
+        <div class="row">
+            <div class="col-sm mr-4 mt-4">
+                <h1 class="mt-4">Brooker</h1>
+                <br>
+                <form>
+                    <label for=""><b><em>Topic</em></b></label>
+                    <input class="form-control" id="address" type="text" value="wss://test.mosquitto.org:8081/mqtt">
+                    <br>
+                    <label><b><em>Status</em></b> </label><br>
+                    <button id="btn-connect" type="button" class="btn btn-success mt-2">Connect</button>
+                    <button id="btn-disconnect" type="button" class="btn btn-danger mt-2" >Disconnect</button>
+                    <br>
+                    <br>
+                    <input id="connection" class="form-control mt-2" type="text" value="Press Connect" disabled>
+                </form>
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Payload</th>
+                            <th>Time Stamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody2">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm mr-4  mt-4">
+                <h1 class="mt-4">Publish</h1>
+                <br>
+                <form>
+                    <label><b><em>Topic</em></b></label>
+                    <input id="pub-topic" class="form-control mt-2" type="text" placeholder="Topic">
+                    <br>
+                    <label><b><em>Payload</em></b></label>
+                    <input id="pub-payload" class="form-control mt-2" type="text" placeholder="Payload">
+                    <br>
+                    <button id="pub-button" type="button" class="btn btn-success mt-2">Publish</button>
+                </form>
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Payload</th>
+                            <th>Time Stamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm  mt-4 ">
+                <h1 class="mt-4">Subscribe</h1>
+                <br>
+                <form>
+                    <label><b><em>Topic</em></b></label>
+                    <input id="sub-topic" type="text" class="form-control mt-2" placeholder="Topic">
+                    <br>
+                    <button id="sub-button" type="button" class="btn btn-success mt-2">Subscribe</button>
+                </form>
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Time Stamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody1">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+    <!-- <body>
+    <div class="form">
+        <div>
+
+            <h3 class="head">MQTT over Web Socket.</h3>
+
+        </div>
+
+        <div class="brooker">
+            <div>
+                <center>
+                    <h2 class="topbrooker">Brooker</h2>
+                </center>
+            </div>
+            <div class="side">
+                <br>
+                <h3>Address</h3>
+                <input type="text" id="address" value="wss://test.mosquitto.org:8081/mqtt">
+                <br>
+                <br>
+                <button id="btn-connect" class="btn btn-primary">Connect</button>
+                <button id="dis-button" class="btn btn-warning">Disconnect</button>
+                <br>
+                <h3>Status</h3>
+                <input type="text" id="connection" value="press connect">
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="message">
+            <h2 class="IM">Incoming messages</h2>
+            <table class="table table-dark">
+                <thead style="max-width: 20%;">
+                    <tr style="max-width: 20%;">
+                        <td>topic</td>
+                        <td style="margin-left: 50px;">payload</td>
+                        <td>time stamp</td>
+                    </tr>
+                </thead>
+                <tbody id="tbody2">
+
+
+                </tbody>
+
+
+            </table>
+        </div>
+
+        <div class="publish">
+            <div>
+                <center>
+                    <h2 class="topbrooker">Publish</h2>
+                </center>
+            </div>
+            <div class="side">
+                <br>
+                <h3>Topic</h3><br>
+                <input id="pub-topic" type="text" placeholder="topic">
+                <h3>payload</h3>
+                <input id="pub-payload" type="text" placeholder="payload"><br>
+                <br>
+                <button id="pub-button" class="btn btn-success">publish</button>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <div class="bottomP">
+            <h2 class="PM">Published Messages</h2>
+            <div>
+                <table id="pub-table" class="table table-dark">
+                    <thead>
+                        <tr>
+                            <td scope="col">Topic</td>
+                            <td scope="col">Payload</td>
+                            <td scope="col">Time Stamp</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="subscribe">
+            <div>
+                <center>
+                    <h2 class="topbrooker">Subscribe</h2>
+                </center>
+            </div>
+            <div class="side">
+                <br>
+                <h3>Topic</h3><br>
+
+                <input id="sub-topic" type="text" placeholder="topic"><br>
+                <br>
+                <button id="sub-button" class="btn btn-danger">Subscribe</button>
+                <button class="btn btn-warning">Unsubscribe</button>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <div class="bottomS">
+            <h2 class="SM">Subscribed Messages</h2>
+            <table id="sub-table" class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">topic</th>
+                        <th scope="col">Time Stamp</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody1">
+
+
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+</body>
+<script src="browserMqtt.js"></script>
+<script src="index.js"></script>
+
+</html>
